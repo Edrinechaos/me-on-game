@@ -1,193 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Me On Game | EdrineChaos</title>
+<meta charset="UTF-8">
+<title>ME ON GAME</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: radial-gradient(circle at top, #121212 0%, #000 65%);
+    color: #ffffff;
+    text-align: center;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+header {
+    padding: 70px 20px;
+}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-      color: #ffffff;
-      line-height: 1.6;
-    }
+header h1 {
+    font-size: 44px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 18px #25D366;
+}
 
-    header {
-      text-align: center;
-      padding: 80px 20px;
-      background: radial-gradient(circle at top, #ff4500, #0f0f0f 60%);
-    }
+header p {
+    color: #bdbdbd;
+    margin-top: 10px;
+    font-size: 16px;
+}
 
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3rem;
-      letter-spacing: 3px;
-    }
+.section {
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: auto;
+}
 
-    header p {
-      margin-top: 15px;
-      font-size: 1.2rem;
-      color: #dddddd;
-    }
+.card {
+    background: #111;
+    border-radius: 18px;
+    padding: 28px;
+    margin: 25px 0;
+    box-shadow: 0 0 25px rgba(0,0,0,0.7);
+}
 
-    .socials {
-      margin-top: 30px;
-    }
+h2 {
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #25D366;
+}
 
-    .socials a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s ease;
-    }
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    background: #25D366;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 0 15px #25D366;
+    transition: 0.3s ease;
+}
 
-    .youtube {
-      background: #ff0000;
-      color: white;
-    }
+.btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px #25D366;
+}
 
-    .tiktok {
-      background: #000000;
-      border: 1px solid #ffffff;
-      color: white;
-    }
+.btn-red {
+    background: #ff0033;
+    box-shadow: 0 0 15px #ff0033;
+}
 
-    .socials a:hover {
-      transform: scale(1.08);
-      opacity: 0.9;
-    }
+.btn-red:hover {
+    box-shadow: 0 0 30px #ff0033;
+}
 
-    section {
-      max-width: 1000px;
-      margin: auto;
-      padding: 70px 20px;
-    }
-
-    section h2 {
-      font-family: 'Orbitron', sans-serif;
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 2.2rem;
-      color: #ff4500;
-    }
-
-    .about {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #cccccc;
-    }
-
-    .tournaments {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
-    }
-
-    .card {
-      background: #1e1e1e;
-      border-radius: 15px;
-      padding: 30px;
-      text-align: center;
-      border: 1px solid #2a2a2a;
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      border-color: #ff4500;
-    }
-
-    .card h3 {
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: #bbbbbb;
-      font-size: 0.95rem;
-    }
-
-    .status {
-      margin-top: 15px;
-      font-weight: bold;
-      color: #ff4500;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: #0b0b0b;
-      color: #777777;
-      font-size: 0.9rem;
-    }
-  </style>
+footer {
+    padding: 35px;
+    font-size: 14px;
+    color: #777;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <h1>ME ON GAME</h1>
-  <p>Competitive Gaming • Tournaments • Content Creator</p>
+    <h1>ME ON GAME</h1>
+    <p>Competitive Gaming • Tournaments • Content Creation</p>
 
-  <div class="socials">
-    <a class="youtube" href="https://youtube.com/@edrinechaos-w5k?si=sNbf3fUx9uf_EtQ-" target="_blank">
-      YouTube
-    </a>
-    <a class="tiktok" href="https://www.tiktok.com/@freakchao" target="_blank">
-      TikTok
-    </a>
-  </div>
+    <a class="btn" href="https://wa.me/256759839983" target="_blank">💬 WhatsApp</a>
+    <a class="btn btn-red" href="https://youtube.com/@edrinechaos-w5k" target="_blank">▶ YouTube</a>
+    <a class="btn btn-red" href="https://www.tiktok.com/@freakchao" target="_blank">🎵 TikTok</a>
 </header>
 
-<section>
-  <h2>About Me</h2>
-  <p class="about">
-    Welcome to <strong>Me On Game</strong>.  
-    I’m EdrineChaos — a competitive gamer and content creator focused on high-energy
-    gameplay, tournaments, and community-driven events.
-    <br><br>
-    Follow me for live matches, upcoming competitions, and exclusive content.
-  </p>
-</section>
-
-<section>
-  <h2>Tournaments</h2>
-
-  <div class="tournaments">
+<div class="section">
     <div class="card">
-      <h3>Online Showdown</h3>
-      <p>Open competitive event for all skill levels.</p>
-      <div class="status">Coming Soon</div>
+        <h2>About Me</h2>
+        <p>
+            My name is <strong>Edrine Chaos</strong>, a competitive gamer and content creator.
+            <br><br>
+            ME ON GAME is my gaming platform where I host tournaments, share gameplay,
+            and build a strong gaming community.
+        </p>
+    </div>
+</div>
+
+<div class="section">
+    <h2>Latest YouTube Video</h2>
+    <div class="card">
+        <iframe width="100%" height="315"
+        src="https://www.youtube.com/embed?listType=user_uploads&list=edrinechaos-w5k"
+        frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class="section">
+    <h2>🏆 Tournaments</h2>
+
+    <div class="card">
+        <h3>🔥 Weekly Online Battle</h3>
+        <p>🎮 Platform: Mobile / Console</p>
+        <p>📅 Date: Coming Soon</p>
+        <p>💰 Prize Pool: To Be Announced</p>
+        <p style="color:#25D366;">Status: Open</p>
     </div>
 
     <div class="card">
-      <h3>Pro Gamers Cup</h3>
-      <p>High-stakes tournament with cash prizes.</p>
-      <div class="status">Register Soon</div>
+        <h3>⚡ Pro Gamers Clash</h3>
+        <p>🎮 Platform: Competitive</p>
+        <p>📅 Date: Coming Soon</p>
+        <p>💰 Prize Pool: Big Rewards</p>
+        <p style="color:#ff0033;">Status: Upcoming</p>
     </div>
-
-    <div class="card">
-      <h3>Community Battle</h3>
-      <p>Fun tournament for fans and followers.</p>
-      <div class="status">Live This Season</div>
-    </div>
-  </div>
-</section>
+</div>
 
 <footer>
-  © 2026 Me On Game • Powered by GitHub Pages
+    © 2026 ME ON GAME • Powered by GitHub Pages
 </footer>
 
 </body>
