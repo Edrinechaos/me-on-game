@@ -2,143 +2,204 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>ME ON GAME</title>
+<title>ME ON GAME | Esports & Tournaments</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- SEO -->
+<meta name="description" content="ME ON GAME – Competitive gaming tournaments, esports community, YouTube & Discord hub.">
+<meta name="theme-color" content="#000000">
+
 <style>
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: radial-gradient(circle at top, #121212 0%, #000 65%);
-    color: #ffffff;
-    text-align: center;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:radial-gradient(circle at top,#111,#000);
+color:#fff;
+text-align:center;
 }
 
-header {
-    padding: 70px 20px;
+#loader{
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+letter-spacing:3px;
+color:#25D366;
+z-index:9999;
 }
 
-header h1 {
-    font-size: 44px;
-    letter-spacing: 4px;
-    text-shadow: 0 0 18px #25D366;
+header{
+padding:80px 20px;
 }
 
-header p {
-    color: #bdbdbd;
-    margin-top: 10px;
-    font-size: 16px;
+h1{
+font-size:42px;
+letter-spacing:4px;
+text-shadow:0 0 18px #25D366;
 }
 
-.section {
-    padding: 50px 20px;
-    max-width: 900px;
-    margin: auto;
+p{color:#bbb}
+
+.btn{
+display:inline-block;
+margin:10px;
+padding:14px 28px;
+border-radius:30px;
+font-weight:bold;
+text-decoration:none;
+color:#000;
+background:#25D366;
+box-shadow:0 0 15px #25D366;
+transition:.3s;
 }
 
-.card {
-    background: #111;
-    border-radius: 18px;
-    padding: 28px;
-    margin: 25px 0;
-    box-shadow: 0 0 25px rgba(0,0,0,0.7);
+.btn:hover{transform:scale(1.1);box-shadow:0 0 30px #25D366}
+.red{background:#ff0033;box-shadow:0 0 15px #ff0033}
+.blue{background:#5865F2;box-shadow:0 0 15px #5865F2}
+
+.section{
+padding:50px 20px;
+max-width:900px;
+margin:auto;
 }
 
-h2 {
-    margin-bottom: 15px;
-    text-shadow: 0 0 10px #25D366;
+.card{
+background:#111;
+border-radius:18px;
+padding:30px;
+margin:25px 0;
+box-shadow:0 0 25px rgba(0,0,0,.7);
+animation:up 1s ease;
 }
 
-.btn {
-    display: inline-block;
-    margin: 10px;
-    padding: 14px 30px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #000;
-    background: #25D366;
-    border-radius: 30px;
-    text-decoration: none;
-    box-shadow: 0 0 15px #25D366;
-    transition: 0.3s ease;
+@keyframes up{
+from{opacity:0;transform:translateY(40px)}
+to{opacity:1;transform:translateY(0)}
 }
 
-.btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 30px #25D366;
+iframe{border-radius:12px;width:100%}
+
+input,select,button{
+width:90%;
+max-width:400px;
+padding:12px;
+margin:10px auto;
+border:none;
+border-radius:8px;
+display:block;
 }
 
-.btn-red {
-    background: #ff0033;
-    box-shadow: 0 0 15px #ff0033;
+button{
+background:#25D366;
+font-weight:bold;
+cursor:pointer;
 }
 
-.btn-red:hover {
-    box-shadow: 0 0 30px #ff0033;
-}
-
-footer {
-    padding: 35px;
-    font-size: 14px;
-    color: #777;
+footer{
+padding:30px;
+color:#777;
+font-size:14px;
 }
 </style>
+
+<script>
+window.onload=()=>document.getElementById("loader").style.display="none";
+</script>
 </head>
 
 <body>
 
-<header>
-    <h1>ME ON GAME</h1>
-    <p>Competitive Gaming • Tournaments • Content Creation</p>
+<div id="loader">ME ON GAME</div>
 
-    <a class="btn" href="https://wa.me/256759839983" target="_blank">💬 WhatsApp</a>
-    <a class="btn btn-red" href="https://youtube.com/@edrinechaos-w5k" target="_blank">▶ YouTube</a>
-    <a class="btn btn-red" href="https://www.tiktok.com/@freakchao" target="_blank">🎵 TikTok</a>
+<header>
+<h1>ME ON GAME</h1>
+<p>Esports • Tournaments • Community</p>
+
+<a class="btn" href="https://wa.me/256759839983" target="_blank">WhatsApp</a>
+<a class="btn red" href="https://youtube.com/@edrinechaos-w5k" target="_blank">YouTube</a>
+<a class="btn red" href="https://www.tiktok.com/@freakchao" target="_blank">TikTok</a>
+<a class="btn blue" href="https://discord.gg/" target="_blank">Discord</a>
 </header>
 
 <div class="section">
-    <div class="card">
-        <h2>About Me</h2>
-        <p>
-            My name is <strong>Edrine Chaos</strong>, a competitive gamer and content creator.
-            <br><br>
-            ME ON GAME is my gaming platform where I host tournaments, share gameplay,
-            and build a strong gaming community.
-        </p>
-    </div>
+<div class="card">
+<h2>About</h2>
+<p>
+I’m <b>Edrine Chaos</b>, a competitive gamer & content creator.  
+ME ON GAME is a platform for real tournaments, livestreams, and a growing esports community.
+</p>
+</div>
 </div>
 
 <div class="section">
-    <h2>Latest YouTube Video</h2>
-    <div class="card">
-        <iframe width="100%" height="315"
-        src="https://www.youtube.com/embed?listType=user_uploads&list=edrinechaos-w5k"
-        frameborder="0" allowfullscreen></iframe>
-    </div>
+<h2>🔴 YouTube</h2>
+<div class="card">
+<iframe height="315"
+src="https://www.youtube.com/embed?listType=user_uploads&list=edrinechaos-w5k"
+allowfullscreen></iframe>
+</div>
 </div>
 
 <div class="section">
-    <h2>🏆 Tournaments</h2>
+<h2>🏆 Tournaments</h2>
 
-    <div class="card">
-        <h3>🔥 Weekly Online Battle</h3>
-        <p>🎮 Platform: Mobile / Console</p>
-        <p>📅 Date: Coming Soon</p>
-        <p>💰 Prize Pool: To Be Announced</p>
-        <p style="color:#25D366;">Status: Open</p>
-    </div>
+<div class="card">
+<h3>Weekly Online Battle</h3>
+<p>Game: FIFA / COD / PUBG</p>
+<p>Status: <span style="color:#25D366">Open</span></p>
+</div>
 
-    <div class="card">
-        <h3>⚡ Pro Gamers Clash</h3>
-        <p>🎮 Platform: Competitive</p>
-        <p>📅 Date: Coming Soon</p>
-        <p>💰 Prize Pool: Big Rewards</p>
-        <p style="color:#ff0033;">Status: Upcoming</p>
-    </div>
+<div class="card">
+<h3>Pro Gamers Clash</h3>
+<p>Big rewards & ranked play</p>
+<p>Status: <span style="color:#ff0033">Upcoming</span></p>
+</div>
+</div>
+
+<div class="section">
+<h2>📝 Register</h2>
+<div class="card">
+<form action="https://docs.google.com/forms" target="_blank">
+<input placeholder="Gamer Name" required>
+<input type="email" placeholder="Email" required>
+<select>
+<option>Select Game</option>
+<option>FIFA</option>
+<option>COD</option>
+<option>PUBG</option>
+</select>
+<button type="submit">Join Tournament</button>
+</form>
+<p style="font-size:13px;color:#777">
+(Form can be linked to Google Forms for real entries)
+</p>
+</div>
+</div>
+
+<div class="section">
+<h2>🏅 Leaderboard</h2>
+<div class="card">
+<p>🥇 ChaosX — 1st Place</p>
+<p>🥈 NightWolf — 2nd Place</p>
+<p>🥉 ShadowPro — 3rd Place</p>
+</div>
+</div>
+
+<div class="section">
+<h2>💬 Discord Community</h2>
+<div class="card">
+<iframe height="350"
+src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark"
+allowtransparency="true"></iframe>
+</div>
 </div>
 
 <footer>
-    © 2026 ME ON GAME • Powered by GitHub Pages
+© 2026 ME ON GAME • Powered by GitHub Pages
 </footer>
 
 </body>
