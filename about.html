@@ -1,40 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>About Me</title>
+  <meta charset="UTF-8">
+  <title>About Me | ME ON GAME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
-      background-color: black;
-      color: white;
-      text-align: center;
-      height: 100vh;
       margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #000000);
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      font-family: Arial, sans-serif;
+      align-items: center;
+      text-align: center;
     }
 
-    .back-btn {
-      margin-top: 30px;
-      color: #25D366;
+    .card {
+      max-width: 500px;
+      padding: 35px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    h1 {
+      margin-bottom: 15px;
+    }
+
+    p {
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 26px;
+      background: white;
+      color: black;
+      font-weight: bold;
       text-decoration: none;
-      font-size: 16px;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+
+    a:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 
 <body>
-  <h1>About Me</h1>
+  <div class="card">
+    <h1>About Me</h1>
+    <p>
+      I’m Edrine Chaos, a passionate gamer and creator behind
+      <strong>ME ON GAME</strong>.
+      This platform is about gaming, competition, and connecting
+      with people who love games as much as I do.
+    </p>
 
-  <p>
-    My name is <strong>Edrine Chaos</strong>.<br>
-    I am a gamer and content creator.<br>
-    Welcome to my official page.
-  </p>
-
-  <a class="back-btn" href="index.html">
-    ← Back to Home
-  </a>
+    <a href="index.html">⬅ Back to Home</a>
+  </div>
 </body>
 </html>
