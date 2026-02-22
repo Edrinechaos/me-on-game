@@ -1,213 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ME ON GAME | Competitive Gaming</title>
+<title>ME ON GAME | Competitive Gaming Platform</title>
+<meta name="description" content="ME ON GAME – Competitive gaming tournaments, community, and events. Join, compete, and win.">
 
-  <!-- SEO -->
-  <meta name="description" content="ME ON GAME — Competitive gaming, tournaments, ranked matches and content.">
-  <meta name="keywords" content="gaming, esports, tournaments, competitive gaming">
-  <meta name="author" content="Edrine Chaos">
+<style>
+:root {
+  --green: #25D366;
+  --dark: #0b0b0b;
+  --card: rgba(255,255,255,0.05);
+}
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-51G0ZLB1Q1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-51G0ZLB1Q1');
-  </script>
+* { box-sizing: border-box; }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: radial-gradient(circle at top, #111, #000);
-      color: #fff;
-      text-align: center;
-    }
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  background: var(--dark);
+  color: #ddd;
+  text-align: center;
+}
 
-    h1 {
-      margin-top: 60px;
-      font-size: 46px;
-      letter-spacing: 4px;
-      text-shadow: 0 0 15px #25D366;
-    }
+header {
+  padding: 60px 20px;
+}
 
-    h2 {
-      color: #25D366;
-      margin-bottom: 12px;
-    }
+header h1 {
+  font-size: 48px;
+  color: var(--green);
+  text-shadow: 0 0 20px var(--green);
+}
 
-    p {
-      color: #ccc;
-      max-width: 800px;
-      margin: auto;
-      line-height: 1.6;
-    }
+section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px 20px;
+  background: var(--card);
+  border-radius: 16px;
+}
 
-    section {
-      margin: 80px 20px;
-      padding: 40px 20px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 18px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.7);
-    }
+input, button {
+  width: 100%;
+  max-width: 360px;
+  padding: 12px;
+  margin: 8px auto;
+  border-radius: 8px;
+  border: none;
+  display: block;
+}
 
-    /* Buttons */
-    .buttons {
-      margin: 40px 0;
-    }
+button {
+  background: var(--green);
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 15px 30px;
-      border-radius: 30px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #000;
-      background: #25D366;
-      box-shadow: 0 0 18px #25D366;
-      transition: 0.3s ease;
-    }
+button:hover {
+  box-shadow: 0 0 15px var(--green);
+}
 
-    .btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 30px #25D366;
-    }
+.hidden { display: none; }
 
-    .btn-youtube {
-      background: #ff0033;
-      box-shadow: 0 0 18px #ff0033;
-      color: #fff;
-    }
-
-    .btn-tiktok {
-      background: #ff0050;
-      box-shadow: 0 0 18px #ff0050;
-      color: #fff;
-    }
-
-    /* Video Grid */
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    video, iframe {
-      width: 100%;
-      height: 200px;
-      border-radius: 16px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.8);
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      color: #ccc;
-    }
-
-    ul li {
-      margin: 10px 0;
-    }
-
-    footer {
-      margin-top: 80px;
-      padding: 25px;
-      font-size: 14px;
-      color: #999;
-      background: #000;
-    }
-  </style>
+footer {
+  margin-top: 80px;
+  padding: 25px;
+  background: #000;
+  font-size: 14px;
+  color: #888;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
+<header>
   <h1>ME ON GAME</h1>
-  <p>Competitive Gaming • Tournaments • Content</p>
+  <p>Competitive Gaming • Tournaments • Community</p>
+</header>
 
-  <!-- BUTTONS -->
-  <div class="buttons">
-    <a class="btn" href="https://wa.me/256XXXXXXXXX" target="_blank">WhatsApp</a>
-    <a class="btn btn-youtube" href="https://youtube.com/" target="_blank">YouTube</a>
-    <a class="btn btn-tiktok" href="https://tiktok.com/" target="_blank">TikTok</a>
-  </div>
+<!-- AUTH -->
+<section id="auth">
+  <h2>Login / Sign Up</h2>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <button onclick="signup()">Sign Up</button>
+  <button onclick="resetPassword()">Forgot Password</button>
+  <p id="authMsg" style="color:red"></p>
+</section>
 
-  <!-- ABOUT -->
-  <section>
-    <h2>About Me</h2>
-    <p>
-      My name is <strong>Edrine Chaos</strong>.<br><br>
-      <strong>ME ON GAME</strong> is my official platform where I share gaming content,
-      host tournaments, and build a strong competitive gaming community.
-    </p>
-  </section>
+<!-- DASHBOARD -->
+<section id="dashboard" class="hidden">
+  <h2 id="welcome"></h2>
+  <p>Your account is active</p>
+  <button onclick="logout()">Logout</button>
+</section>
 
-  <!-- VIDEOS -->
-  <section>
-    <h2>Videos</h2>
+<!-- PROFILE -->
+<section id="profile" class="hidden">
+  <h2>Profile</h2>
+  <input id="username" placeholder="Username">
+  <input id="photo" placeholder="Photo URL (optional)">
+  <button onclick="saveProfile()">Save Profile</button>
+  <p id="profileMsg"></p>
+</section>
 
-    <div class="video-grid">
+<!-- TOURNAMENT -->
+<section id="tournament" class="hidden">
+  <h2>Join Tournament</h2>
+  <input id="game" placeholder="Game Name">
+  <input id="team" placeholder="Team / Solo">
+  <button onclick="joinTournament()">Register</button>
+  <p id="tournamentMsg"></p>
+</section>
 
-      <!-- MP4 VIDEOS (upload these files to your repo) -->
-      <video controls>
-        <source src="video1.mp4" type="video/mp4">
-      </video>
+<!-- ABOUT -->
+<section>
+  <h2>About</h2>
+  <p>
+    ME ON GAME is a competitive gaming platform built for tournaments,
+    skilled players, and a growing gaming community.
+  </p>
+</section>
 
-      <video controls>
-        <source src="video2.mp4" type="video/mp4">
-      </video>
+<footer>
+  © 2026 ME ON GAME. Built to compete.
+</footer>
 
-      <!-- YOUTUBE VIDEOS -->
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+/* 🔥 FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  appId: "YOUR_APP_ID"
+};
 
-    </div>
-  </section>
+const meOnGameApp = initializeApp(firebaseConfig);
+const auth = getAuth(meOnGameApp);
+const db = getFirestore(meOnGameApp);
 
-  <!-- TOURNAMENTS -->
-  <section>
-    <h2>Tournaments</h2>
-    <ul>
-      <li>🏆 Weekly Community Battles</li>
-      <li>🎮 Online Competitive Matches</li>
-      <li>🔥 Ranked & Friendly Games</li>
-      <li>📅 New tournaments announced soon</li>
-    </ul>
-  </section>
+/* AUTH */
+window.signup = async () => {
+  try {
+    await createUserWithEmailAndPassword(auth, email.value, password.value);
+  } catch (e) { authMsg.innerText = e.message; }
+};
 
-  <!-- RULES -->
-  <section>
-    <h2>Rules & Terms</h2>
-    <ul>
-      <li>No cheating or hacking</li>
-      <li>Respect all players</li>
-      <li>Admins have final decisions</li>
-      <li>Breaking rules may result in bans</li>
-    </ul>
-  </section>
+window.login = async () => {
+  try {
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+  } catch (e) { authMsg.innerText = e.message; }
+};
 
-  <!-- CONTACT -->
-  <section>
-    <h2>Contact</h2>
-    <p>
-      For tournaments, collaborations, or questions,<br>
-      reach out via WhatsApp or my social platforms.
-    </p>
-  </section>
+window.resetPassword = async () => {
+  if (!email.value) return authMsg.innerText = "Enter email first";
+  await sendPasswordResetEmail(auth, email.value);
+  authMsg.innerText = "Password reset email sent";
+};
 
-  <!-- FOOTER -->
-  <footer>
-    © 2026 <strong>ME ON GAME</strong>. Created and owned by Edrine Chaos.
-  </footer>
+window.logout = () => signOut(auth);
+
+/* STATE */
+onAuthStateChanged(auth, user => {
+  if (user) {
+    auth.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+    profile.classList.remove("hidden");
+    tournament.classList.remove("hidden");
+    welcome.innerText = "Welcome " + user.email;
+  } else {
+    auth.classList.remove("hidden");
+    dashboard.classList.add("hidden");
+    profile.classList.add("hidden");
+    tournament.classList.add("hidden");
+  }
+});
+
+/* PROFILE */
+window.saveProfile = async () => {
+  const user = auth.currentUser;
+  await setDoc(doc(db, "users", user.uid), {
+    username: username.value,
+    photo: photo.value,
+    role: "user",
+    updatedAt: serverTimestamp()
+  });
+  profileMsg.innerText = "Profile saved";
+};
+
+/* TOURNAMENT */
+window.joinTournament = async () => {
+  const user = auth.currentUser;
+  await setDoc(doc(db, "tournaments", user.uid), {
+    game: game.value,
+    team: team.value,
+    joinedAt: serverTimestamp()
+  });
+  tournamentMsg.innerText = "Registered successfully";
+};
+</script>
 
 </body>
 </html>
