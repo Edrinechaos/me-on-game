@@ -8,8 +8,8 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #000000, #0f2027);
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1a1a1a, #000);
       color: white;
       font-family: Arial, Helvetica, sans-serif;
       display: flex;
@@ -19,28 +19,27 @@
     }
 
     .container {
-      max-width: 500px;
+      max-width: 600px;
       padding: 30px;
     }
 
     h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
+      font-size: 38px;
+      letter-spacing: 3px;
+      margin-bottom: 5px;
     }
 
-    p {
+    .subtitle {
       opacity: 0.8;
       margin-bottom: 30px;
     }
 
     .btn {
       display: block;
-      margin: 15px auto;
-      padding: 14px 28px;
-      font-size: 16px;
-      font-weight: bold;
+      margin: 14px auto;
+      padding: 14px 30px;
       border-radius: 8px;
+      font-weight: bold;
       text-decoration: none;
       color: black;
       background: #25D366;
@@ -52,9 +51,33 @@
       opacity: 0.9;
     }
 
-    .secondary {
-      background: white;
+    .youtube {
+      background: #ff0000;
+      color: white;
+    }
+
+    .tiktok {
+      background: #ffffff;
       color: black;
+    }
+
+    .secondary {
+      background: #dddddd;
+      color: black;
+    }
+
+    .section {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .tournament {
+      background: rgba(255,255,255,0.06);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      text-align: left;
     }
 
     footer {
@@ -68,17 +91,41 @@
 <body>
   <div class="container">
     <h1>ME ON GAME</h1>
-    <p>By Edrine Chaos</p>
+    <p class="subtitle">By Edrine Chaos</p>
 
-    <a class="btn"
-       href="https://wa.me/256759839983"
-       target="_blank">
-       💬 Text me on WhatsApp
+    <!-- SOCIAL BUTTONS -->
+    <a class="btn youtube" href="https://youtube.com" target="_blank">
+      ▶ YouTube Channel
+    </a>
+
+    <a class="btn tiktok" href="https://tiktok.com" target="_blank">
+      🎵 TikTok
+    </a>
+
+    <a class="btn" href="https://wa.me/256759839983" target="_blank">
+      💬 Text me on WhatsApp
     </a>
 
     <a class="btn secondary" href="about.html">
       👤 About Me
     </a>
+
+    <!-- TOURNAMENT SECTION -->
+    <div class="section">
+      <h2>🏆 Tournaments</h2>
+
+      <div class="tournament">
+        <strong>🔥 Weekly Gaming Battles</strong><br>
+        Game: FIFA / PUBG / COD<br>
+        Status: Coming Soon
+      </div>
+
+      <div class="tournament">
+        <strong>💰 Monthly Cash Tournament</strong><br>
+        Prize Pool: TBA<br>
+        Platform: Online
+      </div>
+    </div>
 
     <footer>
       © 2026 • ME ON GAME
