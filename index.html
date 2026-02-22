@@ -2,19 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>ME ON GAME | Competitive Gaming</title>
 
   <!-- SEO -->
-  <meta name="description" content="ME ON GAME is a competitive gaming and esports platform by Edrine Chaos.">
+  <meta name="description" content="ME ON GAME — Competitive gaming, tournaments, ranked matches and content.">
   <meta name="keywords" content="gaming, esports, tournaments, competitive gaming">
   <meta name="author" content="Edrine Chaos">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-51G0ZLB1Q1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-51G0ZLB1Q1');
+  </script>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: radial-gradient(circle at top, #0d0d0d, #000);
+      background: radial-gradient(circle at top, #111, #000);
       color: #fff;
       text-align: center;
     }
@@ -33,11 +43,20 @@
 
     p {
       color: #ccc;
-      max-width: 750px;
+      max-width: 800px;
       margin: auto;
       line-height: 1.6;
     }
 
+    section {
+      margin: 80px 20px;
+      padding: 40px 20px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 18px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    }
+
+    /* Buttons */
     .buttons {
       margin: 40px 0;
     }
@@ -47,7 +66,6 @@
       margin: 10px;
       padding: 15px 30px;
       border-radius: 30px;
-      font-size: 16px;
       font-weight: bold;
       text-decoration: none;
       color: #000;
@@ -73,12 +91,20 @@
       color: #fff;
     }
 
-    section {
-      margin: 80px 20px;
-      padding: 40px 20px;
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 18px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    /* Video Grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    video, iframe {
+      width: 100%;
+      height: 200px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.8);
     }
 
     ul {
@@ -105,24 +131,46 @@
 
   <!-- HEADER -->
   <h1>ME ON GAME</h1>
-  <p>Competitive Gaming • Tournaments • Content Creation</p>
+  <p>Competitive Gaming • Tournaments • Content</p>
 
   <!-- BUTTONS -->
   <div class="buttons">
-    <a class="btn" href="https://wa.me/256759839983" target="_blank">💬 WhatsApp</a>
-    <a class="btn btn-youtube" href="https://youtube.com/@edrinechaos-w5k" target="_blank">▶ YouTube</a>
-    <a class="btn btn-tiktok" href="https://www.tiktok.com/@freakchao" target="_blank">🎵 TikTok</a>
+    <a class="btn" href="https://wa.me/256XXXXXXXXX" target="_blank">WhatsApp</a>
+    <a class="btn btn-youtube" href="https://youtube.com/" target="_blank">YouTube</a>
+    <a class="btn btn-tiktok" href="https://tiktok.com/" target="_blank">TikTok</a>
   </div>
 
   <!-- ABOUT -->
   <section>
     <h2>About Me</h2>
     <p>
-      My name is <strong>Edrine Chaos</strong>, a competitive gamer and content creator.
-      <br><br>
-      <strong>ME ON GAME</strong> is my official gaming platform where I host tournaments,
-      share gaming content, and build a strong esports community.
+      My name is <strong>Edrine Chaos</strong>.<br><br>
+      <strong>ME ON GAME</strong> is my official platform where I share gaming content,
+      host tournaments, and build a strong competitive gaming community.
     </p>
+  </section>
+
+  <!-- VIDEOS -->
+  <section>
+    <h2>Videos</h2>
+
+    <div class="video-grid">
+
+      <!-- MP4 VIDEOS (upload these files to your repo) -->
+      <video controls>
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+
+      <video controls>
+        <source src="video2.mp4" type="video/mp4">
+      </video>
+
+      <!-- YOUTUBE VIDEOS -->
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+
+    </div>
   </section>
 
   <!-- TOURNAMENTS -->
@@ -151,15 +199,14 @@
   <section>
     <h2>Contact</h2>
     <p>
-      For tournaments, collaborations, or questions,
-      reach out via WhatsApp or my social media platforms.
+      For tournaments, collaborations, or questions,<br>
+      reach out via WhatsApp or my social platforms.
     </p>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    © 2026 <strong>ME ON GAME</strong>. All rights reserved.<br>
-    Created and owned by Edrine Chaos.
+    © 2026 <strong>ME ON GAME</strong>. Created and owned by Edrine Chaos.
   </footer>
 
 </body>
