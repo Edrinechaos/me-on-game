@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ME ON GAME | Reaction Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top,#111,#000);
+  color:#fff;
+  text-align:center;
+  overflow:hidden;
+}
+
+h1{
+  margin-top:15px;
+  text-shadow:0 0 15px #25D366;
+}
+
+#panel{
+  margin:10px;
+  font-size:18px;
+}
+
+select,button{
+  padding:10px 18px;
+  margin:8px;
+  border:none;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+button{
+  background:#25D366;
+  cursor:pointer;
+}
+
+#gameArea{
+  position:relative;
+  width:100vw;
+  height:65vh;
+  margin-top:10px;
+}
+
+#target{
+  position:absolute;
+  width:80px;
+  height:80px;
+  background:#25D366;
+  border-radius:50%;
+  box-shadow:0 0 25px #25D366;
+  display:none;
+  cursor:pointer;
+}
+
+footer{
+  font-size:13px;
+  color:#888;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎮 ME ON GAME</h1>
+<p>Reaction Test – Player: <strong>Eddy</strong></p>
+
+<div id="panel">
+👤 Player: <strong>Eddy</strong><br>
+⏱ Time: <span id="time">30</span>s |
+⭐ Score: <span id="score">0</span> |
+🏆 High Score: <span id="high">0</span>
+<br><br>
+Level:
+<select id="level">
+  <option value="1200">Easy</option>
+  <option value="800">Normal</option>
+  <option value="500">Hard</option>
+</select>
+</div>
+
+<div id="gameArea">
+  <div id="target"></div>
+</div>
+
+<button onclick="startGame()">Start Game</button>
+
+<footer>© 2026 ME ON GAME. All Rights Reserved.</footer>
+
+<!-- Sounds -->
+<audio id="hitSound">
+  <source src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg">
+</audio>
+<audio id="endSound">
+  <source src="https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg">
+</audio>
+
+<script>
+const playerName = "Eddy";
+
+let score = 0;
+let timeLeft = 30;
+let moveInterval, timerInterval;
+let highScore = localStorage.getItem("mogHigh") || 0;
+
+document.getElementById("high").innerText = highScore;
+
+const target = document.getElementById("target");
+const area = document.getElementById("gameArea");
+const hitSound = document.getElementById("hitSound");
+const endSound = document.getElementById("endSound");
+
+function randomPos(){
+  const x = Math.random() * (area.clientWidth - 80);
+  const y = Math.random() * (area.clientHeight - 80);
+  target.style.left = x + "px";
+  target.style.top = y + "px";
+}
+
+target.onclick = () => {
+  score++;
+  document.getElementById("score").innerText = score;
+  hitSound.play();
+  randomPos();
+};
+
+function startGame(){
+  score = 0;
+  timeLeft = 30;
+  document.getElementById("score").innerText = 0;
+  document.getElementById("time").innerText = 30;
+
+  const speed = document.getElementById("level").value;
+
+  target.style.display = "block";
+  randomPos();
+
+  moveInterval = setInterval(randomPos, speed);
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time").innerText = timeLeft;
+    if (timeLeft <= 0) endGame();
+  }, 1000);
+}
+
+function endGame(){
+  clearInterval(moveInterval);
+  clearInterval(timerInterval);
+  target.style.display = "none";
+  endSound.play();
+
+  if(score > highScore){
+    highScore = score;
+    localStorage.setItem("mogHigh", highScore);
+    document.getElementById("high").innerText = highScore;
+    alert("🔥 Eddy set a NEW HIGH SCORE: " + score);
+  } else {
+    alert("Game Over, Eddy! Your score: " + score);
+  }
+}
+</script>
+
+</body>
+</html>
