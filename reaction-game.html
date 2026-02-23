@@ -2,48 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>ME ON GAME – Premier League Shooter</title>
+<title>ME ON GAME</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:radial-gradient(circle at top,#0f2027,#203a43,#2c5364);
+  font-family:Arial,sans-serif;
+  background:#000;
   color:#fff;
   text-align:center;
-  overflow-x:hidden;
-}
-
-nav{
-  background:rgba(0,0,0,.6);
-  padding:12px;
-}
-nav a{
-  color:#3cff9a;
-  margin:0 10px;
-  text-decoration:none;
-  font-weight:bold;
 }
 
 h1{
-  margin-top:20px;
   color:#3cff9a;
-  text-shadow:0 0 15px #3cff9a;
-}
-
-.panel{
-  margin:15px auto;
-  max-width:420px;
-  background:rgba(0,0,0,.65);
-  padding:15px;
-  border-radius:15px;
+  text-shadow:0 0 10px #3cff9a;
 }
 
 select,button{
-  width:90%;
+  width:80%;
+  max-width:300px;
   padding:12px;
-  margin:8px 0;
+  margin:10px auto;
   border-radius:25px;
   border:none;
   font-size:16px;
@@ -51,226 +31,158 @@ select,button{
 
 button{
   background:#3cff9a;
+  color:#004cff;
   font-weight:bold;
-  cursor:pointer;
+}
+
+#stats{
+  margin-top:10px;
 }
 
 #gameArea{
   position:relative;
-  width:100%;
-  height:60vh;
+  height:350px;
+  margin:20px;
+  border-radius:15px;
+  background:#111;
   overflow:hidden;
 }
 
-/* TARGET */
 .target{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:red;
   position:absolute;
-  width:60px;
-  height:60px;
-  cursor:crosshair;
 }
 
-.target img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  filter:drop-shadow(0 0 10px rgba(255,255,255,.7));
-}
-
-/* GREAT TEXT */
-#greatText{
-  position:fixed;
-  top:40%;
+#great{
+  position:absolute;
+  top:50%;
   left:-100%;
-  font-size:60px;
+  font-size:40px;
   font-weight:bold;
-  color:#ffd700;
-  text-shadow:0 0 20px #ffd700;
+  color:#3cff9a;
+  white-space:nowrap;
   pointer-events:none;
-  z-index:999;
+  animation:moveText 2s linear;
 }
 
-.animateGreat{
-  animation: slideGreat 1.5s ease-out forwards;
+@keyframes moveText{
+  from{left:-100%;}
+  to{left:120%;}
 }
 
-@keyframes slideGreat{
-  0%{ left:-100%; opacity:0; }
-  30%{ opacity:1; }
-  100%{ left:110%; opacity:0; }
+nav{
+  margin:10px;
 }
-
-section{
-  max-width:800px;
-  margin:40px auto;
-  padding:20px;
-  background:rgba(0,0,0,.5);
-  border-radius:15px;
-}
-
-footer{
-  margin:20px;
-  font-size:12px;
-  opacity:.6;
+nav a{
+  color:#3cff9a;
+  margin:0 5px;
+  text-decoration:none;
 }
 </style>
 </head>
 
 <body>
 
+<h1>⚽ ME ON GAME</h1>
+
 <nav>
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#privacy">Privacy Policy</a>
+  <a href="index.html">Home</a> |
+  <a href="about.html">About</a> |
+  <a href="privacy.html">Privacy Policy</a>
 </nav>
 
-<h1 id="home">⚽ ME ON GAME</h1>
+<select id="player">
+  <option value="">Choose Your Player</option>
+  <option>CR7</option>
+  <option>Messi</option>
+  <option>Neymar</option>
+</select>
 
-<div class="panel">
-  <select id="playerSelect">
-    <option value="">Choose Your Player</option>
-    <option>Messi</option>
-    <option>CR7</option>
-    <option>KDB</option>
-    <option>Bruno</option>
-    <option>Mbappé</option>
-    <option>Haaland</option>
-  </select>
+<select id="difficulty">
+  <option value="easy">Easy</option>
+  <option value="hard">Hard</option>
+</select>
 
-  <select id="difficulty">
-    <option value="1100">Easy</option>
-    <option value="750">Medium</option>
-    <option value="450">Hard</option>
-  </select>
+<button onclick="startGame()">Start Shooting</button>
 
-  <button onclick="startGame()">Start Shooting</button>
-
-  <div style="margin-top:10px">
-    👤 Player: <span id="showName">–</span> |
-    ⏱ Time: <span id="time">30</span>s |
-    ⭐ Score: <span id="score">0</span> |
-    🏆 High Score: <span id="highScore">0</span>
-  </div>
+<div id="stats">
+  ⏱ Time: <span id="time">30</span>s |
+  ⭐ Score: <span id="score">0</span> |
+  🏆 High Score: <span id="high">0</span>
 </div>
 
 <div id="gameArea"></div>
 
-<!-- GREAT TEXT -->
-<div id="greatText">GREAT!</div>
-
-<section id="about">
-<h2>About This Game</h2>
-<p>
-ME ON GAME is a free browser-based reaction shooting game created for fun and skill improvement.
-</p>
-</section>
-
-<section id="privacy">
-<h2>Privacy Policy</h2>
-<p>
-Third-party vendors, including Google, may use cookies to serve ads.
-</p>
-</section>
-
-<footer>© 2026 ME ON GAME</footer>
-
 <script>
-let score = 0;
-let timeLeft = 30;
-let gameTimer, spawnTimer;
-let highScore = Number(localStorage.getItem("plHighScore")) || 0;
-let greatShown = false;
-
-document.getElementById("highScore").textContent = highScore;
-
-const teams = [
- "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
- "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg",
- "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg",
- "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg",
- "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
- "https://upload.wikimedia.org/wikipedia/en/5/56/Tottenham_Hotspur.svg"
-];
+let score=0;
+let time=30;
+let timer;
+let gameInterval;
+let highScore=localStorage.getItem("highScore") || 0;
+document.getElementById("high").textContent=highScore;
 
 function startGame(){
- const player = document.getElementById("playerSelect").value;
- if(!player){ alert("Please choose a player"); return; }
+  score=0;
+  time=30;
+  document.getElementById("score").textContent=score;
+  document.getElementById("time").textContent=time;
+  document.getElementById("gameArea").innerHTML="";
+  
+  clearInterval(timer);
+  clearInterval(gameInterval);
 
- document.getElementById("showName").textContent = player;
- score = 0;
- timeLeft = 30;
- greatShown = false;
+  timer=setInterval(()=>{
+    time--;
+    document.getElementById("time").textContent=time;
+    if(time<=0){
+      endGame();
+    }
+  },1000);
 
- document.getElementById("score").textContent = score;
- document.getElementById("time").textContent = timeLeft;
- document.getElementById("gameArea").innerHTML = "";
-
- clearInterval(gameTimer);
- clearInterval(spawnTimer);
-
- const speed = document.getElementById("difficulty").value;
-
- gameTimer = setInterval(()=>{
-  timeLeft--;
-  document.getElementById("time").textContent = timeLeft;
-  if(timeLeft<=0) endGame();
- },1000);
-
- spawnTimer = setInterval(spawnTarget,speed);
+  let speed=document.getElementById("difficulty").value==="hard"?700:1000;
+  gameInterval=setInterval(createTarget,speed);
 }
 
-function spawnTarget(){
- const area = document.getElementById("gameArea");
- const target = document.createElement("div");
- target.className = "target";
+function createTarget(){
+  const target=document.createElement("div");
+  target.className="target";
+  target.style.left=Math.random()*80+"%";
+  target.style.top=Math.random()*80+"%";
 
- const img = document.createElement("img");
- img.src = teams[Math.floor(Math.random()*teams.length)];
- target.appendChild(img);
+  target.onclick=()=>{
+    score++;
+    document.getElementById("score").textContent=score;
+    target.remove();
+  };
 
- const maxX = area.clientWidth - 60;
- const maxY = area.clientHeight - 60;
- target.style.left = Math.random()*maxX+"px";
- target.style.top = Math.random()*maxY+"px";
+  document.getElementById("gameArea").appendChild(target);
 
- target.onclick = ()=>{
-  score++;
-  document.getElementById("score").textContent = score;
-
-  if(score > highScore && !greatShown){
-    showGreat();
-    greatShown = true;
-  }
-
-  target.remove();
- };
-
- area.appendChild(target);
-
- setTimeout(()=>{
-  if(target.parentNode) target.remove();
- },1200);
-}
-
-function showGreat(){
- const text = document.getElementById("greatText");
- text.classList.remove("animateGreat");
- void text.offsetWidth;
- text.classList.add("animateGreat");
+  setTimeout(()=>{target.remove()},1200);
 }
 
 function endGame(){
- clearInterval(gameTimer);
- clearInterval(spawnTimer);
+  clearInterval(timer);
+  clearInterval(gameInterval);
 
- if(score > highScore){
-  highScore = score;
-  localStorage.setItem("plHighScore", highScore);
-  document.getElementById("highScore").textContent = highScore;
-  alert("🔥 NEW HIGH SCORE!");
- }else{
-  alert("Game Over! Score: "+score);
- }
+  if(score>highScore){
+    highScore=score;
+    localStorage.setItem("highScore",highScore);
+    document.getElementById("high").textContent=highScore;
+    showGreat();
+  }
+
+  document.getElementById("gameArea").innerHTML="";
+}
+
+function showGreat(){
+  const text=document.createElement("div");
+  text.id="great";
+  text.textContent="great Edrine";
+  document.getElementById("gameArea").appendChild(text);
+  setTimeout(()=>text.remove(),2000);
 }
 </script>
 
