@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Me On Game Tournaments</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      color: #fff;
+      position: relative;
+    }
+
+    body::after {
+      content: "Edrine Tour";
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 40px;
+      color: rgba(255,255,255,0.1);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(20,20,20,0.9);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      font-size: 36px;
+      color: #00ffd5;
+      margin: 0;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+    }
+
+    table th, table td {
+      border: 1px solid #444;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table th {
+      background-color: #111;
+      color: #00ffd5;
+    }
+
+    table tr:nth-child(even) {
+      background-color: rgba(255,255,255,0.05);
+    }
+
+    .top-team {
+      background-color: rgba(0,255,213,0.2);
+      font-weight: bold;
+    }
+
+    .fixtures {
+      background-color: rgba(20,20,20,0.9);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .fixtures h2 {
+      color: #00ffd5;
+      margin-top: 0;
+    }
+
+    .match {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    .match:last-child {
+      border-bottom: none;
+    }
+
+    .next-match {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: rgba(0,255,213,0.1);
+      border-left: 5px solid #00ffd5;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 8px 15px;
+      background-color: #00ffd5;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #00e0c0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Me On Game Tournaments</h1>
+  </header>
+
+  <main>
+    <h2 style="text-align:center; color:#00ffd5;">Tournament Standings</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Team</th>
+          <th>Played</th>
+          <th>Won</th>
+          <th>Draw</th>
+          <th>Lost</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody id="leagueTable"></tbody>
+    </table>
+
+    <div class="fixtures">
+      <h2>Match Fixtures</h2>
+      <div id="fixturesList"></div>
+      <div class="next-match" id="nextMatch"></div>
+      <button onclick="simulateNextMatch()">Simulate Next Match</button>
+    </div>
+  </main>
+
+  <script>
+    // Teams
+    const teams = [
+      {name: "Edrine", played:0, won:0, draw:0, lost:0, points:0},
+      {name: "Elvis", played:0, won:0, draw:0, lost:0, points:0},
+      {name: "J Collins", played:0, won:0, draw:0, lost:0, points:0},
+      {name: "Cyber", played:0, won:0, draw:0, lost:0, points:0},
+      {name: "Adamz", played:0, won:0, draw:0, lost:0, points:0}
+    ];
+
+    // Generate round-robin fixtures
+    const fixtures = [];
+    for(let i=0;i<teams.length;i++){
+      for(let j=i+1;j<teams.length;j++){
+        fixtures.push([teams[i].name, teams[j].name]);
+      }
+    }
+
+    let nextIndex = 0;
+
+    function updateTable() {
+      teams.sort((a,b)=>b.points - a.points);
+      const tbody = document.getElementById("leagueTable");
+      tbody.innerHTML = "";
+      teams.forEach((team,index)=>{
+        const tr = document.createElement("tr");
+        if(index===0) tr.classList.add("top-team");
+        tr.innerHTML = `
+          <td>${index+1}</td>
+          <td>${team.name}</td>
+          <td>${team.played}</td>
+          <td>${team.won}</td>
+          <td>${team.draw}</td>
+          <td>${team.lost}</td>
+          <td>${team.points}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function displayFixtures() {
+      const list = document.getElementById("fixturesList");
+      list.innerHTML = "";
+      fixtures.forEach(match=>{
+        const div = document.createElement("div");
+        div.className = "match";
+        div.textContent = `${match[0]} vs ${match[1]}`;
+        list.appendChild(div);
+      });
+      updateNextMatch();
+    }
+
+    function updateNextMatch() {
+      const nextDiv = document.getElementById("nextMatch");
+      if(nextIndex < fixtures.length){
+        nextDiv.textContent = `Next Match: ${fixtures[nextIndex][0]} vs ${fixtures[nextIndex][1]}`;
+      } else {
+        nextDiv.textContent = "Tournament Completed!";
+      }
+    }
+
+    function simulateNextMatch() {
+      if(nextIndex >= fixtures.length) return alert("All matches played!");
+      const match = fixtures[nextIndex];
+      const [team1,team2] = match;
+      const t1 = teams.find(t=>t.name===team1);
+      const t2 = teams.find(t=>t.name===team2);
+
+      const result = Math.floor(Math.random()*3);
+      t1.played++; t2.played++;
+      if(result===0){
+        t1.draw++; t2.draw++;
+        t1.points++; t2.points++;
+      } else if(result===1){
+        t1.won++; t2.lost++;
+        t1.points+=3;
+      } else {
+        t2.won++; t1.lost++;
+        t2.points+=3;
+      }
+
+      nextIndex++;
+      updateTable();
+      updateNextMatch();
+    }
+
+    // Initial render
+    updateTable();
+    displayFixtures();
+  </script>
+</body>
+</html>
