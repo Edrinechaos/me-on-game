@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Me On Game Tournaments</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+  h1, h2 { text-align: center; color: #333; }
+  table { border-collapse: collapse; width: 100%; margin: 20px 0; background: #fff; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+  th { background: #4CAF50; color: white; }
+  input[type="number"] { width: 50px; }
+  button { padding: 5px 10px; cursor: pointer; }
+  .container { max-width: 900px; margin: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Me On Game Tournaments</h1>
+
+<h2>Fixtures</h2>
+<table id="fixturesTable">
+  <thead>
+    <tr>
+      <th>Round</th>
+      <th>Team 1</th>
+      <th>Score</th>
+      <th>Team 2</th>
+      <th>Score</th>
+      <th>Bye</th>
+      <th>Update</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<h2>League Table</h2>
+<table id="leagueTable">
+  <thead>
+    <tr>
+      <th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>PTS</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+</div>
+
+<script>
+const teams = ["Edrine", "Elvis", "J Collins", "Cyber Robert", "Adamz"];
+
+// Round-Robin Fixtures
+const fixtures = [
+  {round:1, t1:"Edrine", t2:"Adamz", bye:"J Collins", s1:null, s2:null},
+  {round:1, t1:"Elvis", t2:"Cyber Robert", bye:null, s1:null, s2:null},
+  {round:2, t1:"Edrine", t2:"Cyber Robert", bye:"Elvis", s1:null, s2:null},
+  {round:2, t1:"J Collins", t2:"Adamz", bye:null, s1:null, s2:null},
+  {round:3, t1:"Edrine", t2:"J Collins", bye:"Cyber Robert", s1:null, s2:null},
+  {round:3, t1:"Elvis", t2:"Adamz", bye:null, s1:null, s2:null},
+  {round:4, t1:"Edrine", t2:"Elvis", bye:"Adamz", s1:null, s2:null},
+  {round:4, t1:"Cyber Robert", t2:"J Collins", bye:null, s1:null, s2:null},
+  {round:5, t1:"Adamz", t2:"Cyber Robert", bye:"Edrine", s1:null, s2:null},
+  {round:5, t1:"Elvis", t2:"J Collins", bye:null, s1:null, s2:null},
+];
+
+// Initialize League Table
+let league = {};
+teams.forEach(team => {
+  league[team] = {P:0, W:0, D:0, L:0, GF:0, GA:0, GD:0, PTS:0};
+});
+
+// Render Fixtures
+function renderFixtures() {
+  const tbody = document.querySelector("#fixturesTable tbody");
+  tbody.innerHTML = "";
+  fixtures.forEach((f,i)=>{
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${f.round}</td>
+      <td>${f.t1}</td>
+      <td><input type="number" min="0" value="${f.s1 !== null ? f.s1 : ''}" id="s1-${i}"></td>
+      <td>${f.t2}</td>
+      <td><input type="number" min="0" value="${f.s2 !== null ? f.s2 : ''}" id="s2-${i}"></td>
+      <td>${f.bye ? f.bye : ''}</td>
+      <td><button onclick="updateMatch(${i})">Update</button></td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+// Update Match Result and League Table
+function updateMatch(index) {
+  const s1 = parseInt(document.getElementById(`s1-${index}`).value);
+  const s2 = parseInt(document.getElementById(`s2-${index}`).value);
+  if (isNaN(s1) || isNaN(s2)) { alert("Enter both scores!"); return; }
+
+  const match = fixtures[index];
+
+  // Remove previous stats if any
+  if (match.s1 !== null && match.s2 !== null) {
+    removePreviousStats(match.t1, match.t2, match.s1, match.s2);
+  }
+
+  match.s1 = s1;
+  match.s2 = s2;
+
+  addStats(match.t1, match.t2, s1, s2);
+  renderLeagueTable();
+}
+
+// Remove previous match stats
+function removePreviousStats(t1, t2, s1, s2){
+  league[t1].P--; league[t2].P--;
+  league[t1].GF -= s1; league[t1].GA -= s2;
+  league[t2].GF -= s2; league[t2].GA -= s1;
+  league[t1].GD = league[t1].GF - league[t1].GA;
+  league[t2].GD = league[t2].GF - league[t2].GA;
+  league[t1].PTS -= s1 > s2 ? 3 : s1===s2?1:0;
+  league[t1].W -= s1 > s2 ? 1 : 0;
+  league[t1].D -= s1===s2?1:0;
+  league[t1].L -= s1 < s2 ? 1 : 0;
+  league[t2].PTS -= s2 > s1 ? 3 : s1===s2?1:0;
+  league[t2].W -= s2 > s1 ? 1 : 0;
+  league[t2].D -= s1===s2?1:0;
+  league[t2].L -= s2 < s1 ? 1 : 0;
+}
+
+// Add stats for a match
+function addStats(t1, t2, s1, s2){
+  league[t1].P++; league[t2].P++;
+  league[t1].GF += s1; league[t1].GA += s2;
+  league[t2].GF += s2; league[t2].GA += s1;
+  league[t1].GD = league[t1].GF - league[t1].GA;
+  league[t2].GD = league[t2].GF - league[t2].GA;
+
+  if(s1>s2){
+    league[t1].W++; league[t2].L++;
+    league[t1].PTS += 3;
+  } else if(s1<s2){
+    league[t2].W++; league[t1].L++;
+    league[t2].PTS += 3;
+  } else{
+    league[t1].D++; league[t2].D++;
+    league[t1].PTS +=1; league[t2].PTS +=1;
+  }
+}
+
+// Render League Table
+function renderLeagueTable(){
+  const tbody = document.querySelector("#leagueTable tbody");
+  tbody.innerHTML = "";
+  // Sort by PTS → GD → GF
+  const sorted = Object.keys(league).sort((a,b)=>{
+    if(league[b].PTS !== league[a].PTS) return league[b].PTS - league[a].PTS;
+    if(league[b].GD !== league[a].GD) return league[b].GD - league[a].GD;
+    return league[b].GF - league[a].GF;
+  });
+
+  sorted.forEach(team=>{
+    const data = league[team];
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${team}</td>
+      <td>${data.P}</td>
+      <td>${data.W}</td>
+      <td>${data.D}</td>
+      <td>${data.L}</td>
+      <td>${data.GF}</td>
+      <td>${data.GA}</td>
+      <td>${data.GD}</td>
+      <td>${data.PTS}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+// Initial render
+renderFixtures();
+renderLeagueTable();
+</script>
+</body>
+</html>
