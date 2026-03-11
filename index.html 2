@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EDRINE TOUR Tournament</title>
+
+<style>
+
+/* Professional Gradient Background */
+body{
+font-family:Arial, sans-serif;
+margin:0;
+color:white;
+text-align:center;
+background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+min-height:100vh;
+position:relative;
+}
+
+/* Watermark */
+body::before{
+content:"EDRINE TOUR";
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%) rotate(-30deg);
+font-size:150px;
+color:rgba(255,255,255,0.04);
+font-weight:900;
+pointer-events:none;
+z-index:0;
+white-space:nowrap;
+}
+
+/* Overlay for readability */
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:-1;
+}
+
+header{
+background:#37003c;
+padding:20px;
+font-size:30px;
+position:relative;
+z-index:1;
+}
+
+nav{
+background:#222;
+padding:10px;
+position:relative;
+z-index:1;
+}
+
+nav button{
+margin:5px;
+padding:10px 15px;
+background:#37003c;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+nav button:hover{
+color:#00ffcc;
+}
+
+section{
+display:none;
+padding:20px;
+position:relative;
+z-index:1;
+}
+
+table{
+margin:auto;
+border-collapse:collapse;
+width:80%;
+background:#222;
+}
+
+th,td{
+border:1px solid #555;
+padding:10px;
+}
+
+th{
+background:#37003c;
+}
+
+img{
+vertical-align:middle;
+margin-right:8px;
+}
+
+input,select{
+padding:8px;
+margin:5px;
+}
+
+button.clickable{
+cursor:pointer;
+padding:5px 10px;
+margin:5px;
+background:#37003c;
+color:white;
+border:none;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🏆 EDRINE TOUR
+</header>
+
+<nav>
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('table')">League Table</button>
+<button onclick="showPage('fixtures')">Fixtures</button>
+<button onclick="showPage('results')">Results</button>
+<button onclick="showPage('history')">Match History</button>
+<button onclick="showPage('teams')">Teams</button>
+<button onclick="showPage('profile')">Team Profile</button>
+<button onclick="showPage('admin')">Admin</button>
+</nav>
+
+<!-- Home Section -->
+<section id="home">
+<h2>Welcome to EDRINE TOUR</h2>
+<p>Official Tournament Website</p>
+</section>
+
+<!-- Teams Section -->
+<section id="teams">
+<h2>Teams</h2>
+<ul id="teamList"></ul>
+</section>
+
+<!-- Fixtures Section -->
+<section id="fixtures">
+<h2>Upcoming Fixtures</h2>
+<ul id="fixtureList"></ul>
+</section>
+
+<!-- Results Section -->
+<section id="results">
+<h2>Results</h2>
+<ul id="resultList"></ul>
+</section>
+
+<!-- Match History Section -->
+<section id="history">
+<h2>Match History</h2>
+<ul id="historyList"></ul>
+</section>
+
+<!-- League Table Section -->
+<section id="table">
+<h2>League Table</h2>
+<table>
+<thead>
+<tr>
+<th>Pos</th>
+<th>Team</th>
+<th>P</th>
+<th>W</th>
+<th>D</th>
+<th>L</th>
+<th>Pts</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</section>
+
+<!-- Team Profile Section -->
+<section id="profile">
+<h2>Team Profile</h2>
+<div id="teamProfile"></div>
+</section>
+
+<!-- Admin Section -->
+<section id="admin">
+<h2>Add Match Result</h2>
+<select id="teamA"></select>
+<input type="number" id="scoreA" placeholder="Score">
+<select id="teamB"></select>
+<input type="number" id="scoreB" placeholder="Score">
+<br>
+<button onclick="addResult()">Add Result</button>
+</section>
+
+<script>
+// Teams
+const teams = [
+{ name:"Edrine", logo:"logos/edrine.png" },
+{ name:"Elvis", logo:"logos/elvis.png" },
+{ name:"J Collins", logo:"logos/jcollins.png" },
+{ name:"Cyber R", logo:"logos/cyberr.png" },
+{ name:"Adamz", logo:"logos/adamz.png" }
+];
+
+// Stats and fixtures
+let stats = {};
+teams.forEach(t=>stats[t.name]={p:0,w:0,d:0,l:0,pts:0});
+
+let fixtures = [
+"Edrine vs Elvis",
+"J Collins vs Cyber R",
+"Adamz vs Edrine",
+"Elvis vs Cyber R"
+];
+
+let results = [];
+let historyMatches = [];
+
+// Show sections
+function showPage(page){
+document.querySelectorAll("section").forEach(sec=>sec.style.display="none");
+document.getElementById(page).style.display="block";
+}
+
+// Load Teams
+function loadTeams(){
+const list=document.getElementById("teamList");
+teams.forEach(t=>{
+let li=document.createElement("li");
+li.innerHTML=`<button class="clickable" onclick="showTeamProfile('${t.name}')"><img src="${t.logo}" width="40">${t.name}</button>`;
+list.appendChild(li);
+});
+}
+
+// Load Fixtures
+function loadFixtures(){
+const list=document.getElementById("fixtureList");
+fixtures.forEach(f=>{
+let li=document.createElement("li");
+li.textContent=f;
+list.appendChild(li);
+});
+}
+
+// Load Admin Selectors
+function loadSelectors(){
+const a=document.getElementById("teamA");
+const b=document.getElementById("teamB");
+teams.forEach(t=>{
+let o1=document.createElement("option"); o1.textContent=t.name; a.appendChild(o1);
+let o2=document.createElement("option"); o2.textContent=t.name; b.appendChild(o2);
+});
+}
+
+// Add Match Result
+function addResult(){
+let teamA=document.getElementById("teamA").value;
+let teamB=document.getElementById("teamB").value;
+let scoreA=parseInt(document.getElementById("scoreA").value);
+let scoreB=parseInt(document.getElementById("scoreB").value);
+if(teamA===teamB) return;
+
+// Update results
+results.push(teamA+" "+scoreA+" - "+scoreB+" "+teamB);
+
+// Update stats
+stats[teamA].p++; stats[teamB].p++;
+if(scoreA>scoreB){ stats[teamA].w++; stats[teamA].pts+=3; stats[teamB].l++; }
+else if(scoreB>scoreA){ stats[teamB].w++; stats[teamB].pts+=3; stats[teamA].l++; }
+else{ stats[teamA].d++; stats[teamB].d++; stats[teamA].pts++; stats[teamB].pts++; }
+
+// Update match history
+historyMatches.push({teamA,teamB,scoreA,scoreB,date:new Date().toLocaleString()});
+
+// Refresh UI
+updateResults();
+updateTable();
+updateHistory();
+}
+
+// Update Results List
+function updateResults(){
+const list=document.getElementById("resultList");
+list.innerHTML="";
+results.forEach(r=>{
+let li=document.createElement("li");
+li.textContent=r;
+list.appendChild(li);
+});
+}
+
+// Update Match History
+function updateHistory(){
+const list=document.getElementById("historyList");
+list.innerHTML="";
+historyMatches.forEach(m=>{
+let li=document.createElement("li");
+li.textContent=`${m.teamA} ${m.scoreA} - ${m.scoreB} ${m.teamB} (${m.date})`;
+list.appendChild(li);
+});
+}
+
+// Update League Table
+function updateTable(){
+const body=document.getElementById("tableBody");
+body.innerHTML="";
+let sorted=Object.keys(stats).sort((a,b)=>stats[b].pts-stats[a].pts);
+sorted.forEach((team,i)=>{
+let s=stats[team];
+let row=`
+<tr>
+<td>${i+1}</td>
+<td><img src="${teams.find(t=>t.name===team).logo}" width="30">${team}</td>
+<td>${s.p}</td>
+<td>${s.w}</td>
+<td>${s.d}</td>
+<td>${s.l}</td>
+<td>${s.pts}</td>
+</tr>`;
+body.innerHTML+=row;
+});
+}
+
+// Show Team Profile
+function showTeamProfile(team){
+let s=stats[team];
+document.getElementById("teamProfile").innerHTML=`
+<h3>${team}</h3>
+<img src="${teams.find(t=>t.name===team).logo}" width="80">
+<p>Played: ${s.p}</p>
+<p>Wins: ${s.w}</p>
+<p>Draws: ${s.d}</p>
+<p>Losses: ${s.l}</p>
+<p>Points: ${s.pts}</p>
+`;
+showPage("profile");
+}
+
+// Initialize
+showPage("home");
+loadTeams();
+loadFixtures();
+loadSelectors();
+updateTable();
+
+</script>
+
+</body>
+</html>
